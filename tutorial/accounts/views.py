@@ -4,7 +4,7 @@ from accounts.forms import (
     EditProfileForm
 )
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
-
+from django.contrib.auth import update_session_auth_hash
 def home(request):
     numbers = [1,2,3,4,5]
     name = 'JP'
@@ -34,6 +34,8 @@ def edit_profile(request):
         if form.is_valid():
             form.save()
             return redirect('/account/profile')
+        else:
+            return redirect('/account/change-password')    
     else:
         form = EditProfileForm(instance=request.user)
 
@@ -42,9 +44,10 @@ def edit_profile(request):
 
 def change_password(request):
     if request.method == 'POST':
-        form = PasswordChangeForm(request.POST, instance=request.user)
+        form = PasswordChangeForm(data=request.POST, user=request.user)
         if form.is_valid():
             form.save()
+            update_session_auth_hash(request, form.user)
             return redirect('/account/profile')
     else:
         form = PasswordChangeForm(request.user)
