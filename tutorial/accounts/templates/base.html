@@ -37,11 +37,11 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="/account/profile">My Profile</a></li>
+                    <li><a href="{% url 'view_profile' %}">My Profile</a></li>
                     <li><a href="#">Another action</a></li>
                     <li><a href="#">Something else here</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="account/logout">Log Out</a></li>
+                    <li><a href="{% url 'logout' %}">Log Out</a></li>
                   </ul>
                 </li>
               </ul>
@@ -49,8 +49,8 @@
                 {% else %}
 <ul class="nav navbar-nav navbar-right">
 
-                <li><a href="/account/register">Register</a></li>
-                <li><a href="/account/login">Log In</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+                <li><a href="{% url 'login' %}">Log In</a></li>
   </ul>
 
 {% endif %}
