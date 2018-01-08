@@ -99,3 +99,10 @@ def all_product(request):
     products = Product.objects.all()
     template = 'accounts/all_product.html'
     return render(request, template, {'products':products,'user': request.user})
+
+@login_required
+def my_product(request):
+    user = request.user
+    products = Product.objects.filter(author=request.user)
+    template = 'accounts/my_product.html'
+    return render(request, template, {'products':products,'user': request.user})

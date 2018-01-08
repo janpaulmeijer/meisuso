@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block head %}
+{% endblock %}
+{%block body%}
+
+<h2>Product List</h2>
+
+{% for Product in products %}
+<p>Product: {{ Product.product_name }}</p>
+<p>Price: {{Product.price}}</p>
+{%endfor%}
+<a href="/account/add-product" class="btn btn-default" role="button">Add a Product</a>
+
+{%endblock%}

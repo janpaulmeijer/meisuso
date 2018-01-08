@@ -7,8 +7,19 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     description = models.CharField(max_length=100, default = '')
     city = models.CharField(max_length=100, default = '')
+    adress = models.CharField(max_length=100, default = '')
+    postcode = models.CharField(max_length=100, default = '')
     website = models.URLField(default = '')
     phone = models.IntegerField(default = 0)
+    company = models.CharField(max_length=100, default = '')
+    hdyhau = models.CharField(max_length=1000, default = '')
+    customer_role = (
+        ('B', 'Buyer'),
+        ('P', 'Producer'),
+        ('O', 'Other'),
+    )
+    role = models.CharField(max_length=1, choices=customer_role, default='')
+
 
     def __str__(self):
         return self.user.username
@@ -23,13 +34,17 @@ class Product(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, editable=False)
     product_name = models.CharField(max_length=100, default = '')
     price = models.IntegerField(default = 0)
-    category = models.CharField(max_length=100, default = '')
+    CAT = (
+        ('F', 'Fruit'),
+        ('V', 'Vegetable'),
+    )
+    category = models.CharField(max_length=1, choices=CAT, default = '')
     season = models.CharField(max_length=100, default = '')
     description = models.CharField(max_length=100, default = '')
+    unit = models.CharField(max_length=100, default = '')
 
     def get_absolute_url(self):
         return reverse('home')
-
 
     def __str__(self):
         return self.product_name
