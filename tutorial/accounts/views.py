@@ -2,12 +2,18 @@ from django.shortcuts import render, redirect
 from accounts.forms import (
     RegistrationForm,
     EditProfileForm,
-    ProfileForm
+    ProfileForm,
+    AddProductForm
 )
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from .models import UserProfile, Product
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
+from django.template import loader
+from django.http import HttpResponse
+
 
 
 def home(request):
@@ -72,3 +78,24 @@ def change_password(request):
 
         args = {'form': form}
         return render(request, 'accounts/change_password.html', args)
+
+class ProductCreateView(CreateView):
+    model = Product
+    template_name = 'accounts/add_product.html'
+    fields = (
+    'product_name',
+    'price',
+    'category',
+    'season',
+    'description')
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+@login_required
+def all_product(request):
+    #return HttpResponse("hier komt gewoon wat text")
+    products = Product.objects.all()
+    template = 'accounts/all_product.html'
+    return render(request, template, {'products':products,'user': request.user})

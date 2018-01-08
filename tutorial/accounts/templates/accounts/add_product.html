@@ -2,7 +2,7 @@
 {% block head %}
 {% endblock %}
 {%block body%}
-<form class="form-group"method="post">
+<form method="post">
   {% csrf_token %}
   {{form.as_p}}
   {{profile_form.as_p}}

@@ -10,5 +10,8 @@ urlpatterns = [
     path('profile', views.view_profile, name='view_profile'),
     path('profile/edit', views.edit_profile, name='edit_profile'),
     path('change-password', views.change_password, name='change_password'),
+#    path('add-product', views.add_product, name='add_product'),
+    path('add-product/', views.ProductCreateView.as_view(), name='add_product'),
+    path('all-product/', views.all_product, name='all-product'),
 
 ]

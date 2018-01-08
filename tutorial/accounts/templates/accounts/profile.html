@@ -10,9 +10,13 @@
 <p>Description: {{user.userprofile.description}}</p>
 <p>City: {{user.userprofile.city}}</p>
 <p>Phone: {{user.userprofile.phone}}</p>
+<a href="/account/profile/edit" class="btn btn-default" role="button">Edit Profile</a>
+<h2>Product List</h2>
+
 {% for Product in products %}
 <p>Product: {{ Product.product_name }}</p>
+<p>Price: {{Product.price}}</p>
 {%endfor%}
-<a href="/account/profile/edit" class="btn btn-default" role="button">Edit Profile</a>
+<a href="/account/add-product" class="btn btn-default" role="button">Add a Product</a>
 
 {%endblock%}
