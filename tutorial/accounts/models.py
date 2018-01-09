@@ -5,20 +5,20 @@ from django.urls import reverse
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    description = models.CharField(max_length=100, default = '')
-    city = models.CharField(max_length=100, default = '')
-    adress = models.CharField(max_length=100, default = '')
-    postcode = models.CharField(max_length=100, default = '')
-    website = models.URLField(default = '')
-    phone = models.IntegerField(default = 0)
-    company = models.CharField(max_length=100, default = '')
-    hdyhau = models.CharField(max_length=1000, default = '')
+    description = models.CharField(max_length=100, default = '', null=True)
+    city = models.CharField(max_length=100, default = '', null=True)
+    adress = models.CharField(max_length=100, default = '', null=True)
+    postcode = models.CharField(max_length=100, default = '', null=True)
+    website = models.URLField(default = '', null=True)
+    phone = models.IntegerField(default = 0, null=True)
+    company = models.CharField(max_length=100, default = '', null=True)
+    hdyhau = models.CharField(max_length=1000, default = '', null=True)
     customer_role = (
         ('B', 'Buyer'),
         ('P', 'Producer'),
         ('O', 'Other'),
     )
-    role = models.CharField(max_length=1, choices=customer_role, default='')
+    role = models.CharField(max_length=1, choices=customer_role, default='', null=True)
 
 
     def __str__(self):
@@ -27,7 +27,6 @@ class UserProfile(models.Model):
 def create_profile(sender,**kwargs):
     if kwargs['created']:
         user_profile = UserProfile.objects.create(user=kwargs['instance'])
-
 post_save.connect(create_profile, sender=User)
 
 class Product(models.Model):
