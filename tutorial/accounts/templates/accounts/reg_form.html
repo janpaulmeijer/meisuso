@@ -6,8 +6,9 @@
 <div class="container">
 
 
-  <form method="post">
+  <form class = "form-horizontal" method="post">
   {% csrf_token %}
+
   {{form.as_p}}
   {{profile_form.as_p}}
   <button type="btn btn-default">Submit</button>

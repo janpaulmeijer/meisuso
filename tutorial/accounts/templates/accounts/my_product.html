@@ -17,7 +17,7 @@
     {% for Product in products %}
     <tr>
       <th scope="row">{{ Product.id }}</th>
-      <td>{{ Product.product_name }}</td>
+      <td><a href="/account/product_detail/{{Product.id}}" product.id>{{ Product.product_name }}</a></td>
       <td>{{ Product.price }}</td>
       <td>{{ Product.category }}</td>
       <td>{{ Product.season }}</td>

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from accounts.forms import (
     RegistrationForm,
     EditProfileForm,
@@ -6,14 +6,13 @@ from accounts.forms import (
     AddProductForm
 )
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import update_session_auth_hash, authenticate, login
 from django.contrib.auth.decorators import login_required
 from .models import UserProfile, Product
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 from django.urls import reverse_lazy
 from django.template import loader
-from django.http import HttpResponse
-
+from django.http import HttpResponse, Http404
 
 
 def home(request):
@@ -27,13 +26,17 @@ def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('/account')
+            user = form.save()
+            user.refresh_from_db()  # load the profile instance created by the signal
+            user.userprofile.city = form.cleaned_data.get('city')
+            user.save()
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=user.username, password=raw_password)
+            login(request, user)
+            return redirect('/account/my-product')
     else:
         form = RegistrationForm()
-
-        args = {'form': form}
-        return render(request, 'accounts/reg_form.html', args)
+    return render(request, 'accounts/reg_form.html', {'form': form})
 
 @login_required
 def view_profile(request):
@@ -106,3 +109,6 @@ def my_product(request):
     products = Product.objects.filter(author=request.user)
     template = 'accounts/my_product.html'
     return render(request, template, {'products':products,'user': request.user})
+
+class ProductDetailView(DetailView):
+    model = Product
