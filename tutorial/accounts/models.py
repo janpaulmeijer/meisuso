@@ -8,6 +8,8 @@ from django.dispatch import receiver
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     description = models.CharField(max_length=100, default = '', null=True)
+    country = models.CharField(max_length=100, default = '', null=True)
+    state = models.CharField(max_length=100, default = '', null=True)
     city = models.CharField(max_length=100, default = '', null=True)
     adress = models.CharField(max_length=100, default = '', null=True)
     postcode = models.CharField(max_length=100, default = '', null=True)

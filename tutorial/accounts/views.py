@@ -8,8 +8,8 @@ from accounts.forms import (
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash, authenticate, login
 from django.contrib.auth.decorators import login_required
-from .models import UserProfile, Product
-from django.views.generic import CreateView, DetailView
+from .models import UserProfile, Product, User
+from django.views.generic import CreateView, DetailView, ListView
 from django.urls import reverse_lazy
 from django.template import loader
 from django.http import HttpResponse, Http404
@@ -112,3 +112,23 @@ def my_product(request):
 
 class ProductDetailView(DetailView):
     model = Product
+
+@login_required
+def all_users(request):
+    users = User.objects.all()
+    profiles = UserProfile.objects.all()
+    template = 'accounts/all_users.html'
+    return render(request, template, {'users':users,'profiles':profiles})
+
+#class AllUserView(ListView):
+#    context_object_name = 'all-users'
+#    template_name = 'accounts/all_users.html'
+#    queryset = User.objects.get()
+#    model = User
+
+#    def get_context_data(self, **kwargs):
+#         context = super(AllUserView, self).get_context_data(**kwargs)
+#         context['profile'] = UserProfile.objects.get()
+#         context['user'] = self.queryset
+
+#         return context

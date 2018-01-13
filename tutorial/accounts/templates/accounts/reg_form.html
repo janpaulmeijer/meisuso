@@ -1,18 +1,12 @@
 {% extends 'base.html' %}
-
 {% block head %}
 {% endblock %}
 {% block body %}
-<div class="container">
-
-
   <form class = "form-horizontal" method="post">
   {% csrf_token %}
-
   {{form.as_p}}
   {{profile_form.as_p}}
-  <button type="btn btn-default">Submit</button>
-
+  <button class="btn btn-default" type="btn btn-default">Submit</button>
+  <button class="btn btn-default" onclick="goBack()">Go Back</button>
 </form>
-</div>
 {% endblock %}

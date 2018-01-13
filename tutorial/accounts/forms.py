@@ -72,7 +72,6 @@ class RegistrationForm(UserCreationForm):
         )
 
 
-
 class EditProfileForm(UserChangeForm):
     class Meta:
         model = User
@@ -82,6 +81,29 @@ class EditProfileForm(UserChangeForm):
         'email',
         'password'
         )
+    first_name = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Write your name here'
+            }
+        )
+    )
+    last_name = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Write your name here'
+            }
+        )
+    )
+    email = forms.EmailField(
+        max_length=254,
+        widget=forms.EmailInput(attrs={
+        'class': 'form-control'})
+    )
 
 class ProfileForm(forms.ModelForm):
     class Meta:
@@ -90,6 +112,42 @@ class ProfileForm(forms.ModelForm):
         'city',
         'website',
         'phone')
+description = forms.CharField(
+    max_length=100,
+    widget=forms.TextInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Write your name here'
+        }
+    )
+)
+city = forms.CharField(
+    max_length=100,
+    widget=forms.TextInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Write your name here'
+        }
+    )
+)
+website = forms.CharField(
+    max_length=100,
+    widget=forms.TextInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Write your name here'
+        }
+    )
+)
+phone = forms.CharField(
+    max_length=100,
+    widget=forms.TextInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Write your name here'
+        }
+    )
+)
 
 class AddProductForm(forms.ModelForm):
 
