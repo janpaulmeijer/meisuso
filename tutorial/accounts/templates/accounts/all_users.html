@@ -3,20 +3,23 @@
 {% endblock %}
 {%block body%}
 
-  <table class="table">
-  
-    <tbody>
-  {% for user in users %}      <tr>
-        <th scope="row">{{ user.id }}</th>
-        <td>{{user.username}}</td>
-        <td>{{userprofile.city}}</td>
-        <td>{{user.userprofile.city}}</td>
-      </tr>
 
+  <div class="row">
+      <div class="col-sm-12">
+          <h3>All Producers</h3>
+      </div>
+{% for profile in profiles %}
+              <div class="col-sm-4 col-lg-2">
+                  <div class="thumbnail">
+                      <div class="caption">
+                          <p><a href="/account/product_detail/{{Product.id}}" product.id>Username: {{ profile.company }}</a></p>
+                          <p>Country: {{ profile.country }}</p>
 
+                      </div>
+                  </div>
+              </div>
+              {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+          {% endfor %}
 
-
-{%endfor%}
-    </tbody>
-  </table>
+  </div>
 {%endblock%}

@@ -115,10 +115,10 @@ class ProductDetailView(DetailView):
 
 @login_required
 def all_users(request):
-    users = User.objects.all()
-    profiles = UserProfile.objects.all()
+    #users = User.objects.all()
+    profiles = UserProfile.objects.filter(role='P')
     template = 'accounts/all_users.html'
-    return render(request, template, {'users':users,'profiles':profiles})
+    return render(request, template, {'profiles':profiles})
 
 #class AllUserView(ListView):
 #    context_object_name = 'all-users'
