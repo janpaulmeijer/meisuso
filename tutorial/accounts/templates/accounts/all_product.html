@@ -3,28 +3,28 @@
 {% endblock %}
 {%block body%}
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Product ID</th>
-        <th scope="col">Product</th>
-      <th scope="col">Price</th>
-      <th scope="col">Category</th>
-      <th scope="col">Season</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for Product in products %}
-    <tr>
-      <th scope="row">{{ Product.id }}</th>
-      <td>{{ Product.product_name }}</td>
-      <td>{{ Product.price }}</td>
-      <td>{{ Product.category }}</td>
-      <td>{{ Product.season }}</td>
-    </tr>{% endfor %}
+<div class="row">
+    <div class="col-sm-12">
+        <h3>All Products</h3>
+    </div>
+        {% for Product in products %}
+            <div class="col-sm-4 col-lg-2">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <p><a href="/account/product_detail/{{Product.id}}" product.id>Product name: {{ Product.product_name }}</a></p>
+                        <p>Product category: {{ Product.category }}</p>
+                        <p>Product category: {{ Product.category }}</p>
+                        <p>Product category: {{ Product.category }}</p>
+                        <p>Product category: {{ Product.category }}</p>
+                        <p>Product category: {{ Product.category }}</p>
+                        <p>Product category: {{ Product.category }}</p>
+                    </div>
+                </div>
+            </div>
+            {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+        {% endfor %}
 
-  </tbody>
-</table>
+</div>
 <button onclick="goBack()" class = "btn btn-default">Go Back</button>
 
 

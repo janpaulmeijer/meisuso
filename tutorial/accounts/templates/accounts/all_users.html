@@ -2,20 +2,9 @@
 {% block head %}
 {% endblock %}
 {%block body%}
-  <form class="form-horizontal" method="post">
-
-
 
   <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Supplier ID</th>
-          <th scope="col">Supplier Name</th>
-        <th scope="col">Province</th>
-        <th scope="col">Category</th>
-        <th scope="col">Season</th>
-      </tr>
-    </thead>
+  
     <tbody>
   {% for user in users %}      <tr>
         <th scope="row">{{ user.id }}</th>
@@ -23,6 +12,10 @@
         <td>{{userprofile.city}}</td>
         <td>{{user.userprofile.city}}</td>
       </tr>
+
+
+
+
 {%endfor%}
     </tbody>
   </table>
