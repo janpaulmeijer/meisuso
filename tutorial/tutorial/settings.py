@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ["127.0.0.1","localhost","192.168.2.6","77.173.139.128","192.168
 # Application definition
 
 INSTALLED_APPS = [
+    #'bootstrap_admin', # always before django.contrib.admin
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+    'easy_maps',
+#    'django_admin_bootstrapped',
+#    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -81,6 +85,16 @@ DATABASES = {
     }
 }
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'postgres',
+#        'USER': 'meijer',
+#        'PASSWORD': '',
+#        'HOST': 'localhost',
+#        'PORT': '',
+#    }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators

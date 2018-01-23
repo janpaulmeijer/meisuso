@@ -9,16 +9,46 @@ class RegistrationForm(UserCreationForm):
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
-                'placeholder': 'Write your name here'
+                'placeholder': 'What is your hometown?'
             }
         )
     )
+    country = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Country'
+            }
+        )
+    )
+
+    address1 = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Address line 1'
+            }
+        )
+    )
+
+    address2 = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Address line 2'
+            }
+        )
+    )
+
     first_name = forms.CharField(
         max_length=100,
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
-                'placeholder': 'Write your name here'
+                'placeholder': 'Write your first name here'
             }
         )
     )
@@ -28,7 +58,7 @@ class RegistrationForm(UserCreationForm):
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
-                'placeholder': 'Write your name here'
+                'placeholder': 'Write your last name here'
             }
         )
     )
@@ -38,28 +68,42 @@ class RegistrationForm(UserCreationForm):
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
-                'placeholder': 'Write your name here'
+                'placeholder': 'Pick a cool username'
             }
         )
     )
 
     email = forms.EmailField(
         max_length=254,
-        widget=forms.EmailInput(attrs={
-        'class': 'form-control'})
+        widget=forms.EmailInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'What is your e-mail address?'
+            }
+        )
     )
 
     password1 = forms.CharField(
         max_length = 100,
-        widget=forms.PasswordInput(attrs={
-        'class': 'form-control'})
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Pick a secure password'
+            }
+        )
     )
 
     password2 = forms.CharField(
         max_length = 100,
-        widget=forms.PasswordInput(attrs={
-        'class': 'form-control'})
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Repeat your password'
+            }
+        )
     )
+
+
     class Meta:
         model = User
         fields = (
@@ -110,6 +154,7 @@ class ProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ('description',
         'city',
+        'country',
         'website',
         'phone')
 description = forms.CharField(
@@ -122,6 +167,15 @@ description = forms.CharField(
     )
 )
 city = forms.CharField(
+    max_length=100,
+    widget=forms.TextInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Write your name here'
+        }
+    )
+)
+country = forms.CharField(
     max_length=100,
     widget=forms.TextInput(
         attrs={

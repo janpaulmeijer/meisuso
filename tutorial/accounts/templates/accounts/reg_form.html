@@ -2,11 +2,84 @@
 {% block head %}
 {% endblock %}
 {% block body %}
-  <form class = "form-horizontal" method="post">
+  <form class = "form-group" method="post">
   {% csrf_token %}
-  {{form.as_p}}
-  {{profile_form.as_p}}
+  <h1>Personal details</h1>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <p>Username</p>{{form.username}}
+    </div>
+    <div class="form-group col-md-6">
+      <p>E-mail</p>{{form.email}}
+    </div>
+  </div>
+  
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <p>First name</p>{{form.first_name}}
+      </div>
+      <div class="form-group col-md-6">
+        <p>Last name</p>{{form.last_name}}
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <p>Password</p>{{form.password1}}
+      </div>
+      <div class="form-group col-md-6">
+        <p>Repeat Password</p>{{form.password2}}
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <p>Country</p>{{form.country}}
+      </div>
+      <div class="form-group col-md-6">
+        <p>City</p>{{form.city}}
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <p>Address 1</p>{{form.address1}}
+      </div>
+      <div class="form-group col-md-6">
+        <p>Address 2</p>{{form.address2}}
+      </div>
+    </div>
+
   <button class="btn btn-default" type="btn btn-default">Submit</button>
   <button class="btn btn-default" onclick="goBack()">Go Back</button>
+
+
+</form>
+
+<form>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">City</label>
+      <input type="text" class="form-control" id="inputCity">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputState">State</label>
+      <select id="inputState" class="form-control">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">Zip</label>
+      <input type="text" class="form-control" id="inputZip">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="gridCheck">
+      <label class="form-check-label" for="gridCheck">
+        Check me out
+      </label>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Sign in</button>
 </form>
 {% endblock %}

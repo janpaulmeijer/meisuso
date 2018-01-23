@@ -1,28 +1,31 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-from django.urls import reverse
 from django.dispatch import receiver
+from geopy.geocoders import Nominatim
 
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    description = models.CharField(max_length=100, default = '', null=True)
-    country = models.CharField(max_length=100, default = '', null=True)
-    state = models.CharField(max_length=100, default = '', null=True)
-    city = models.CharField(max_length=100, default = '', null=True)
-    adress = models.CharField(max_length=100, default = '', null=True)
-    postcode = models.CharField(max_length=100, default = '', null=True)
-    website = models.URLField(default = '', null=True)
-    phone = models.IntegerField(default = 0, null=True)
-    company = models.CharField(max_length=100, default = '', null=True)
-    hdyhau = models.CharField(max_length=1000, default = '', null=True)
+    description = models.CharField(max_length=100, default = '', null=True, blank=True)
+    country = models.CharField(max_length=100, default = '', null=True, blank=True)
+    state = models.CharField(max_length=100, default = '', null=True, blank=True)
+    city = models.CharField(max_length=100, default = '', null=True, blank=True)
+    adress1 = models.CharField(max_length=1000, default = '', null=True, blank=True)
+    adress2 = models.CharField(max_length=1000, default = '', null=True, blank=True)
+    postcode = models.CharField(max_length=100, default = '', null=True, blank=True)
+    website = models.URLField(default = '', null=True, blank=True)
+    phone = models.IntegerField(default = 0, null=True, blank=True)
+    company = models.CharField(max_length=100, default = '', null=True, blank=True)
+    hdyhau = models.CharField(max_length=1000, default = '', null=True, blank=True)
+    lat = models.DecimalField(max_digits=9, decimal_places=6, null = True, blank=True)
+    lon = models.DecimalField(max_digits=9, decimal_places=6, null = True, blank=True)
     customer_role = (
         ('B', 'Buyer'),
         ('P', 'Producer'),
         ('O', 'Other'),
     )
-    role = models.CharField(max_length=1, choices=customer_role, default='', null=True)
+    role = models.CharField(max_length=1, choices=customer_role, default='', null=True, blank=True)
 
 
     def __str__(self):

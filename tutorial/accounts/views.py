@@ -13,6 +13,7 @@ from django.views.generic import CreateView, DetailView, ListView
 from django.urls import reverse_lazy
 from django.template import loader
 from django.http import HttpResponse, Http404
+from geopy.geocoders import Nominatim
 
 
 def home(request):
@@ -29,9 +30,18 @@ def register(request):
             user = form.save()
             user.refresh_from_db()  # load the profile instance created by the signal
             user.userprofile.city = form.cleaned_data.get('city')
+            user.userprofile.country = form.cleaned_data.get('country')
+            geolocator = Nominatim()
+            fulladdress = user.userprofile.city+' '+user.userprofile.country
+            location = geolocator.geocode(fulladdress)
+            user.userprofile.lat = location.latitude
+            user.userprofile.lon = location.longitude
+            print(user.userprofile.city+' '+user.userprofile.country)
+            print(location.latitude, location.longitude)
             user.save()
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
+
             login(request, user)
             return redirect('/account/my-product')
     else:
@@ -115,8 +125,8 @@ class ProductDetailView(DetailView):
 
 @login_required
 def all_users(request):
-    #users = User.objects.all()
-    profiles = UserProfile.objects.filter(role='P')
+    users = User.objects.all()
+    profiles = UserProfile.objects.all()
     template = 'accounts/all_users.html'
     return render(request, template, {'profiles':profiles})
 

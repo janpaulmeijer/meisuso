@@ -1,5 +1,48 @@
 {% extends 'base.html' %}
 {% block head %}
+<script>
+
+  function initMap() {
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 8,
+      center: {lat: 52.374540, lng: 4.897976}
+    });
+
+    // Create an array of alphabetical characters used to label the markers.
+    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    // Add some markers to the map.
+    // Note: The code uses the JavaScript Array.prototype.map() method to
+    // create an array of markers based on a given "locations" array.
+    // The map() method here has nothing to do with the Google Maps API.
+    var markers = locations.map(function(location, i) {
+      return new google.maps.Marker({
+        position: location,
+        label: labels[i % labels.length]
+      });
+    });
+
+    // Add a marker clusterer to manage the markers.
+    var markerCluster = new MarkerClusterer(map, markers,
+        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+  }
+
+
+
+  var locations = [
+      {% for profile in profiles %}
+    {lat: {{profile.lat|safe}}, lng: {{profile.lon|safe}}},
+
+    {% endfor %}
+
+  ]
+</script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOD9zXzWQCwLPMHl3Xn1HsOV7KqTvkTR0&callback=initMap">
+</script>
 {% endblock %}
 {%block body%}
 
@@ -12,14 +55,16 @@
               <div class="col-sm-4 col-lg-2">
                   <div class="thumbnail">
                       <div class="caption">
-                          <p><a href="/account/product_detail/{{Product.id}}" product.id>Username: {{ profile.company }}</a></p>
+                          <p><a href="/account/product_detail/{{Product.id}}" product.id>Company name: {{ profile.company }}</a></p>
                           <p>Country: {{ profile.country }}</p>
+                          <p>Country: {{ profile.lat }}</p>
+                          <p>Country: {{ profile.lon }}</p>
 
                       </div>
                   </div>
               </div>
               {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
           {% endfor %}
-
+<div id="map"></div>
   </div>
 {%endblock%}

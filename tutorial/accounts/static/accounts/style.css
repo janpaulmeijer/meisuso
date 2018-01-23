@@ -1,5 +1,5 @@
 h1 {
-    color: #FCA205 !important;
+    color: black !important;
 }
 
 
@@ -7,5 +7,8 @@ h1 {
   background: white url("../images/IMG_3962.JPG");
   background-size: 100%;
   background-position: center center;
+}
 
+body {
+  background-color: #f8f9fa!important;
 }
