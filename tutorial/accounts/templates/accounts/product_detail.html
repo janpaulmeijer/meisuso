@@ -2,19 +2,22 @@
 {% block head %}
 {% endblock %}
 {%block body%}
-<h1>Single Product</h1>
-<p>Product Name: {{product.product_name}}</p>
-<p>Price: {{product.price}}</p>
-<p>Category: {{product.category}}</p>
-<p>Season: {{product.season}}</p>
-<a href="/account/profile/edit" class="btn btn-default" role="button">Edit Product</a>
-<button class="btn btn-default" onclick="goBack()">Go Back</button>
+<div class="container">
 
-<script>
-function goBack() {
-    window.history.back();
-}
-</script>
+  <h1>Single Product</h1>
+  <p>Product Name: {{product.product_name}}</p>
+  <p>Price: {{product.price}}</p>
+  <p>Category: {{product.category}}</p>
+  <p>Season: {{product.season}}</p>
+  <a href="/account/profile/edit" class="btn btn-default" role="button">Edit Product</a>
+  <button class="btn btn-default" onclick="goBack()">Go Back</button>
+
+  <script>
+  function goBack() {
+      window.history.back();
+  }
+  </script>
+</div>
 
 
 

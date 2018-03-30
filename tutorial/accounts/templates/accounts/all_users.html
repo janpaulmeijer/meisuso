@@ -46,7 +46,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOD9zXzWQCwLPMHl3Xn1HsOV7
 {% endblock %}
 {%block body%}
 
-
+<div class="container">
   <div class="row">
       <div class="col-sm-12">
           <h3>All Producers</h3>
@@ -57,14 +57,21 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOD9zXzWQCwLPMHl3Xn1HsOV7
                       <div class="caption">
                           <p><a href="/account/product_detail/{{Product.id}}" product.id>Company name: {{ profile.company }}</a></p>
                           <p>Country: {{ profile.country }}</p>
-                          <p>Country: {{ profile.lat }}</p>
-                          <p>Country: {{ profile.lon }}</p>
+                          <p>City: {{ profile.city }}</p>
+                          <p>Address: {{ profile.address1 }}</p>
+                          <p>Latitude: {{ profile.lat }}</p>
+                          <p>Longitude: {{ profile.lon }}</p>
+                          <p>Role: {{ profile.role }}</p>
 
                       </div>
                   </div>
               </div>
               {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
           {% endfor %}
-<div id="map"></div>
+<button onclick="goBack()" class = "btn btn-default">Go Back</button>
   </div>
+
+  <div id="map"></div>
+</div>
+
 {%endblock%}

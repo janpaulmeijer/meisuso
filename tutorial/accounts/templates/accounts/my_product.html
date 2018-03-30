@@ -2,29 +2,31 @@
 {% block head %}
 {% endblock %}
 {%block body%}
+<div class="container">
+  <h2>Product List</h2><table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Product ID</th>
+          <th scope="col">Product</th>
+        <th scope="col">Price</th>
+        <th scope="col">Category</th>
+        <th scope="col">Season</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for Product in products %}
+      <tr>
+        <th scope="row">{{ Product.id }}</th>
+        <td><a href="/account/product_detail/{{Product.id}}" product.id>{{ Product.product_name }}</a></td>
+        <td>{{ Product.price }}</td>
+        <td>{{ Product.category }}</td>
+        <td>{{ Product.season }}</td>
+      </tr>{% endfor %}
 
-<h2>Product List</h2><table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Product ID</th>
-        <th scope="col">Product</th>
-      <th scope="col">Price</th>
-      <th scope="col">Category</th>
-      <th scope="col">Season</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for Product in products %}
-    <tr>
-      <th scope="row">{{ Product.id }}</th>
-      <td><a href="/account/product_detail/{{Product.id}}" product.id>{{ Product.product_name }}</a></td>
-      <td>{{ Product.price }}</td>
-      <td>{{ Product.category }}</td>
-      <td>{{ Product.season }}</td>
-    </tr>{% endfor %}
+    </tbody>
+  </table>
+  <a href="/account/add-product" class="btn btn-default" role="button">Add a Product</a>
+</div>
 
-  </tbody>
-</table>
-<a href="/account/add-product" class="btn btn-default" role="button">Add a Product</a>
 
 {%endblock%}

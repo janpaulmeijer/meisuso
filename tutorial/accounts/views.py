@@ -8,7 +8,7 @@ from accounts.forms import (
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash, authenticate, login
 from django.contrib.auth.decorators import login_required
-from .models import UserProfile, Product, User
+from .models import UserProfile, Product, User, BlogItem
 from django.views.generic import CreateView, DetailView, ListView
 from django.urls import reverse_lazy
 from django.template import loader
@@ -17,11 +17,17 @@ from geopy.geocoders import Nominatim
 
 
 def home(request):
+    blogitems = BlogItem.objects.all()
+    template = 'accounts/home.html'
+    return render(request, template, {'blogitems':blogitems,'user': request.user})
+
+def signupnewsletter(request):
     numbers = [1,2,3,4,5]
     name = 'JP'
 
     args ={'myname':name, 'numbers':numbers}
-    return render(request,'accounts/home.html', args)
+    return render(request,'accounts/signupnewsletter.html', args)
+
 
 def register(request):
     if request.method == 'POST':
@@ -31,12 +37,18 @@ def register(request):
             user.refresh_from_db()  # load the profile instance created by the signal
             user.userprofile.city = form.cleaned_data.get('city')
             user.userprofile.country = form.cleaned_data.get('country')
+            user.userprofile.address1 = form.cleaned_data.get('address1')
+            user.userprofile.address2 = form.cleaned_data.get('address2')
+            user.userprofile.state = form.cleaned_data.get('state')
+            user.userprofile.postcode = form.cleaned_data.get('postcode')
+            user.userprofile.company = form.cleaned_data.get('company')
+            user.userprofile.role = form.cleaned_data.get('role')
             geolocator = Nominatim()
-            fulladdress = user.userprofile.city+' '+user.userprofile.country
+            fulladdress = user.userprofile.city+' '+user.userprofile.country+' '+user.userprofile.postcode+' '+user.userprofile.address1
             location = geolocator.geocode(fulladdress)
             user.userprofile.lat = location.latitude
             user.userprofile.lon = location.longitude
-            print(user.userprofile.city+' '+user.userprofile.country)
+            print(user.userprofile.city+' '+user.userprofile.country+' '+user.userprofile.postcode+' '+user.userprofile.address1)
             print(location.latitude, location.longitude)
             user.save()
             raw_password = form.cleaned_data.get('password1')
@@ -126,7 +138,7 @@ class ProductDetailView(DetailView):
 @login_required
 def all_users(request):
     users = User.objects.all()
-    profiles = UserProfile.objects.all()
+    profiles = UserProfile.objects.filter(role='Producer')
     template = 'accounts/all_users.html'
     return render(request, template, {'profiles':profiles})
 

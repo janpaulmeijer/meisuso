@@ -16,6 +16,8 @@ urlpatterns = [
     path('all-product/', views.all_product, name='all-product'),
     path('all-users', views.all_users, name='all-users'),
     path('product_detail/<int:pk>/', views.ProductDetailView.as_view(), name='product-detail'),
+    path('signupnewsletter', views.signupnewsletter, name='signupnewsletter'),
+
 
 
 ]

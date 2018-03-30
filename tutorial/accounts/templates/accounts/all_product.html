@@ -3,28 +3,32 @@
 {% endblock %}
 {%block body%}
 
-<div class="row">
-    <div class="col-sm-12">
-        <h3>All Products</h3>
-    </div>
-        {% for Product in products %}
-            <div class="col-sm-4 col-lg-2">
-                <div class="thumbnail">
-                    <div class="caption">
-                        <p><a href="/account/product_detail/{{Product.id}}" product.id>Product name: {{ Product.product_name }}</a></p>
-                        <p>Category: {{ Product.category }}</p>
-                        <p>Season: {{ Product.season }}</p>
-                        <p>Price per unit: {{ Product.price }}</p>
-                        <p>Units: {{ Product.unit }}</p>
-                        <p>Description: {{ Product.description }}</p>
-                    </div>
-                </div>
-            </div>
-            {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
-        {% endfor %}
 
+<div class="container">
+  <div class="row">
+      <div class="col-sm-12">
+          <h3>All Products</h3>
+      </div>
+          {% for Product in products %}
+              <div class="col-sm-4 col-lg-2">
+                  <div class="thumbnail">
+                      <div class="caption">
+                          <p><a href="/account/product_detail/{{Product.id}}" product.id>Product name: {{ Product.product_name }}</a></p>
+                          <p>Category: {{ Product.category }}</p>
+                          <p>Season: {{ Product.season }}</p>
+                          <p>Price per unit: {{ Product.price }}</p>
+                          <p>Units: {{ Product.unit }}</p>
+                          <p>Description: {{ Product.description }}</p>
+                      </div>
+                  </div>
+              </div>
+              {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+          {% endfor %}
+
+  </div>
+  <button onclick="goBack()" class = "btn btn-default">Go Back</button>
 </div>
-<button onclick="goBack()" class = "btn btn-default">Go Back</button>
+
 
 
 

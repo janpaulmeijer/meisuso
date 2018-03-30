@@ -21,12 +21,11 @@ class UserProfile(models.Model):
     lat = models.DecimalField(max_digits=9, decimal_places=6, null = True, blank=True)
     lon = models.DecimalField(max_digits=9, decimal_places=6, null = True, blank=True)
     customer_role = (
-        ('B', 'Buyer'),
-        ('P', 'Producer'),
-        ('O', 'Other'),
+        ('Buyer', 'Buyer'),
+        ('Producer', 'Producer'),
+        ('Other', 'Other'),
     )
-    role = models.CharField(max_length=1, choices=customer_role, default='', null=True, blank=True)
-
+    role = models.CharField(max_length=8, choices=customer_role, default='', null=True, blank=True)
 
     def __str__(self):
         return self.user.username
@@ -55,3 +54,11 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_name
+
+class BlogItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, editable=False)
+    title = models.CharField(max_length=100, default = '', null=True, blank=True)
+    description = models.TextField(max_length=10000, default = '', null=True, blank=True)
+
+    def __str__(self):
+        return self.title

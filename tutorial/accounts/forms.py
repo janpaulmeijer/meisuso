@@ -22,6 +22,16 @@ class RegistrationForm(UserCreationForm):
             }
         )
     )
+    customer_role = (
+        ('Buyer', 'Buyer'),
+        ('Producer', 'Producer'),
+        ('Other', 'Other'),
+    )
+
+    role = forms.CharField(label='Role',
+    widget=forms.Select(choices=customer_role))
+
+
 
     address1 = forms.CharField(
         max_length=100,
@@ -39,6 +49,57 @@ class RegistrationForm(UserCreationForm):
             attrs={
                 'class': 'form-control',
                 'placeholder': 'Address line 2'
+            }
+        )
+    )
+
+    website = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Website'
+            }
+        )
+    )
+
+    postcode = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Postcode'
+            }
+        )
+    )
+
+    state = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'State'
+            }
+        )
+    )
+
+
+    phone = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Phone number'
+            }
+        )
+    )
+
+    company = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Company name'
             }
         )
     )
